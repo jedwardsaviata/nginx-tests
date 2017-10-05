@@ -1,0 +1,37 @@
+version: '3.3'
+services:
+  rest:
+    image: node
+    volumes:
+      - './rest-server:/opt'
+    working_dir: '/opt'
+    environment:
+      HOST_IDENTITY: 'rest'
+      BIND_PORT: 8080
+    command: npm run server
+    ports:
+      - 8080
+
+  secure:
+    image: node
+    volumes:
+      - './rest-server:/opt'
+    working_dir: '/opt'
+    environment:
+      HOST_IDENTITY: 'secure'
+      BIND_PORT: 8080
+    command: npm run server
+    ports:
+      - 8080
+
+  inner:
+    image: inner-proxy
+    environment:
+      FORCE_HTTPS: 'false'
+    ports:
+      - 8080
+
+  outer:
+    image: outer-proxy
+    ports:
+      - 8080

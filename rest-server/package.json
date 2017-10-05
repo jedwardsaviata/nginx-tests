@@ -1,0 +1,25 @@
+{
+  "name": "rest-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "get": "coffee src/get.coffee",
+    "get-port": "coffee src/get-port.coffee",
+    "start": "npm run -s server",
+    "server": "coffee src/server.coffee"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "coffeescript": "^2.0.1",
+    "durations": "^3.0.0",
+    "express": "^4.16.1",
+    "joi": "^11.1.1",
+    "lodash": "^4.17.4",
+    "log-a-log": "^2.0.0",
+    "ramda": "^0.24.1",
+    "yargs": "^9.0.1"
+  }
+}
