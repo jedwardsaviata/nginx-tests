@@ -14,10 +14,18 @@ port = process.env.BIND_PORT ? 8080
 
 app = express()
 
-app.get '/', (req, res) ->
+app.use (req, res) ->
   {
-    method
+    cookies
     headers
+    hostname
+    ip
+    method
+    originalUrl
+    path
+    protocol
+    query
+    secure
   } = req
 
   console.log """
@@ -26,7 +34,19 @@ app.get '/', (req, res) ->
   """
 
   res.set('X-Host-Identity', identity).status(200).json
-    status: 'good'
+    identity: identity
+    status: 'up'
+    method: method
+    headers: headers
+    path: path
+    query: query
+    debug:
+      originalUrl: originalUrl
+      protocol: protocol
+      secure: secure
+      hostname: hostname
+      ip: ip
+      cookies: cookies
 
 app.listen port, -> console.log "Listening on port #{port}"
 

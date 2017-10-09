@@ -1,8 +1,8 @@
 #!/bin/bash -x
 
 # Update the Nginx site config with the api server
-sed -i s/\{\{REST_SERVICE\}\}/$REST_SERVICE/ /etc/nginx/conf.d/default.conf
-sed -i s/\{\{SECURE_SERVICE\}\}/$SECURE_SERVICE/ /etc/nginx/conf.d/default.conf
+#sed -i s/\{\{REST_SERVICE\}\}/$REST_SERVICE/ /etc/nginx/conf.d/default.conf
+#sed -i s/\{\{SECURE_SERVICE\}\}/$SECURE_SERVICE/ /etc/nginx/conf.d/default.conf
 
 # Inject the HTTPS enforcement logic into the Nginx configuration script
 FORCE_HTTPS=`echo ${FORCE_HTTPS:-false} | tr '[:upper:]' '[:lower:]'`

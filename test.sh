@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -x
 
 # Retry a command until it succeeds or until the
 # maximum number of attempts is reached.
@@ -21,7 +21,8 @@ retry() {
   done
 }
 
-STACK_NAME=proxy-test
+NOW=`date -u +%Y-%m-%d-%H-%M-%S`
+STACK_NAME=proxy-test-$NOW
 
 cd inner-proxy
 docker build . --tag=inner-proxy
@@ -34,14 +35,13 @@ cd ..
 docker stack deploy -c docker-compose.yml --prune $STACK_NAME
 
 cd rest-server
-PROXY_PORT=`npm run -s get-port --serviceName=${STACK_NAME}_outer --targetPort=8080`
+PROXY_PORT=`npm run -s get-port -- --serviceName=${STACK_NAME}_outer --targetPort=8080`
 cd ..
 
 retry 120 timeout 5 ./port.pl localhost:${PROXY_PORT}
 
 cd rest-server
-npm run -s get -- $OUTER_PROXY
+PROXY_SERVICE=${STACK_NAME}_outer npm run -s get
 
 docker stack rm $STACK_NAME
-
 

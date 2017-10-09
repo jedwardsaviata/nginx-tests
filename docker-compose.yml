@@ -27,7 +27,7 @@ services:
   inner:
     image: inner-proxy
     environment:
-      FORCE_HTTPS: 'false'
+      FORCE_HTTPS: 'true'
     ports:
       - 8080
 
@@ -35,3 +35,4 @@ services:
     image: outer-proxy
     ports:
       - 8080
+      - 8443

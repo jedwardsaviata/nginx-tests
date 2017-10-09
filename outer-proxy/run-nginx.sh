@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 # Update the Nginx site config with the api server
-sed -i s/\{\{INNER_PROXY\}\}/$INNER_PROXY/ /etc/nginx/conf.d/default.conf
+#sed -i s/\{\{INNER_PROXY\}\}/$INNER_PROXY/ /etc/nginx/conf.d/default.conf
 
 cat /etc/nginx/conf.d/default.conf
 
